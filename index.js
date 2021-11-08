@@ -23,8 +23,8 @@ async function sendAlert(alert) {
 try {
   const integrationKey = core.getInput('pagerduty-integration-key');
   const alertSummary = core.getInput('alert-summary');
-  const alertSeverity = core.getInput('alert-severity');
-  const eventAction = core.getInput('alert-event-action');
+  const alertSeverity = core.getInput('alert-severity') || 'warning';
+  const eventAction = core.getInput('alert-event-action') || 'trigger';
   
   let alert = {
     payload: {
