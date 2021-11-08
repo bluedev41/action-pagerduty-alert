@@ -39,7 +39,7 @@ In your `steps`:
 ```yaml
 - name: Send PagerDuty alert on failure
   if: ${{ failure() }}
-  uses: Entle/action-pagerduty-alert@0.1.0
+  uses: smartcontractkit/action-pagerduty-alert@0.1.0
   with:
     alert-summary: 'Example alert failed because of xyz'
     alert-severity: 'warning'
