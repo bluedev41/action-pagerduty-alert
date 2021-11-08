@@ -15,6 +15,18 @@ Sends a critical PagerDuty alert, e.g. on action failure.
 
 **Required:** the integration key for your PagerDuty service
 
+`alert-summary`
+
+**Required:** A brief text summary of the event, used to generate the summaries/titles of any associated alerts. The maximum permitted length of this property is 1024 characters.
+
+`alert-severity`
+
+**Required:** The perceived severity of the status the event is describing with respect to the affected system. This can be critical, error, warning or info.
+
+`alert-event-action`
+
+**Required:** The type of event. Can be trigger, acknowledge or resolve.
+
 `pagerduty-dedup-key`
 
 **Optional:** a `dedup_key` for your alert. This will enable PagerDuty to coalesce multiple alerts into one.
@@ -29,6 +41,9 @@ In your `steps`:
   if: ${{ failure() }}
   uses: Entle/action-pagerduty-alert@0.1.0
   with:
+    alert-summary: 'Example alert failed because of xyz'
+    alert-severity: 'warning'
+    event-action: 'trigger'
     pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
     pagerduty-dedup-key: github_workflow_failed
 ```

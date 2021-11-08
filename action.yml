@@ -1,6 +1,15 @@
 name: 'PagerDuty Alert'
-description: 'GitHub Action to send a critical PagerDuty alert, e.g. on action failure.'
+description: 'GitHub Action to send a PagerDuty alert, e.g. on action failure.'
 inputs:
+  alert-summary:
+    description: 'A brief text summary of the event, used to generate the summaries/titles of any associated alerts. The maximum permitted length of this property is 1024 characters.'
+    required: true
+  alert-severity:
+    description: 'The perceived severity of the status the event is describing with respect to the affected system. This can be critical, error, warning or info.'
+    required: true
+  alert-event-action:
+    descritpion: 'The type of event. Can be trigger, acknowledge or resolve.'
+    required: true
   pagerduty-integration-key:
     description: 'The integration key for your PagerDuty service'
     required: true

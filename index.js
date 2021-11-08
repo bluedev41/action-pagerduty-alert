@@ -22,13 +22,16 @@ async function sendAlert(alert) {
 // Run the action
 try {
   const integrationKey = core.getInput('pagerduty-integration-key');
-
+  const alertSummary = core.getInput('alert-summary');
+  const alertSeverity = core.getInput('alert-severity');
+  const eventAction = core.getInput('alert-event-action');
+  
   let alert = {
     payload: {
-      summary: `${context.repo.repo}: Error in "${context.workflow}" run by @${context.actor}`,
+      summary: alertSummary,
       timestamp: new Date().toISOString(),
       source: 'GitHub Actions',
-      severity: 'critical',
+      severity: alertSeverity,
       custom_details: {
         run_details: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
         related_commits: context.payload.commits
@@ -37,7 +40,7 @@ try {
       },
     },
     routing_key: integrationKey,
-    event_action: 'trigger',
+    event_action: eventAction,
   };
   const dedupKey = core.getInput('pagerduty-dedup-key');
   if (dedupKey != '') {
